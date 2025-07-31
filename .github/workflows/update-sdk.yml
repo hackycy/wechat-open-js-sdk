@@ -1,5 +1,8 @@
 name: Update WeChat JS SDK
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
 
