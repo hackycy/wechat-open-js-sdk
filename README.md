@@ -1,5 +1,8 @@
 # 微信官方 js-sdk
 
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+
 基于`Github Action`将官方`js-sdk`发布到`npm`
 
 > 版本记录于[.versionrc](./versionrc)
@@ -28,3 +31,8 @@ import wx from 'wechat-open-js-sdk/1.2.0'
 # 感谢
 
 - [wx-jssdk-ts](https://github.com/zhaoky/wx-jssdk-ts/tree/master)
+
+[npm-version-src]: https://img.shields.io/npm/v/wechat-open-js-sdk?style=flat&colorA=080f12&colorB=1fa669
+[npm-version-href]: https://npmjs.com/package/wechat-open-js-sdk
+[npm-downloads-src]: https://img.shields.io/npm/dm/wechat-open-js-sdk?style=flat&colorA=080f12&colorB=1fa669
+[npm-downloads-href]: https://npmjs.com/package/wechat-open-js-sdk
