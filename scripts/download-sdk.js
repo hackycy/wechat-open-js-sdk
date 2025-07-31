@@ -41,6 +41,7 @@ async function updatePackageJson(versions) {
   
   // Create exports object
   const exports = {};
+  let mainExport = '';
   
   // Add exports for each version
   versions.forEach(version => {
@@ -51,9 +52,11 @@ async function updatePackageJson(versions) {
   if (versions.length > 0) {
     const lastVersion = versions[versions.length - 1];
     exports["."] = `./lib/${lastVersion}/index.js`;
+    mainExport = `./lib/${lastVersion}/index.js`;
   }
   
   packageJson.exports = exports;
+  packageJson.main = mainExport; // Update main entry point
   
   // Write back to package.json
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');

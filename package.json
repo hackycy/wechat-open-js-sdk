@@ -1,9 +1,16 @@
 {
   "name": "wechat-open-js-sdk",
   "version": "0.0.1",
-  "description": "微信JS-SDK",
+  "description": "微信官方 js-sdk npm版",
   "packageManager": "pnpm@10.12.4",
-  "main": "index.js",
+  "main": "./lib/1.6.0/index.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "./1.0.0": "./lib/1.0.0/index.js",
+    "./1.2.0": "./lib/1.2.0/index.js",
+    "./1.6.0": "./lib/1.6.0/index.js",
+    ".": "./lib/1.6.0/index.js"
+  },
   "keywords": [
     "wxjssdk",
     "weixin",
@@ -13,7 +20,8 @@
     "wx"
   ],
   "files": [
-    "lib"
+    "lib",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
@@ -23,10 +31,5 @@
   "author": "hackycy",
   "scripts": {
     "download": "node scripts/download-sdk.js"
-  },
-  "exports": {
-    "./1.2.0": "./lib/1.2.0/index.js",
-    "./1.6.0": "./lib/1.6.0/index.js",
-    ".": "./lib/1.6.0/index.js"
   }
 }
