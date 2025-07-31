@@ -2,8 +2,8 @@ name: Download WeChat JS-SDK
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - main
 
 jobs:
   download-sdk:
@@ -12,28 +12,56 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
         
-      - name: Extract version from tag
-        id: get_version
+      - name: Check if .versionrc was modified
+        id: check_versionrc
         run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          VERSION=${TAG_NAME#v}
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Tag: $TAG_NAME, Version: $VERSION"
+          if git diff --name-only HEAD~1 HEAD | grep -q "^\.versionrc$"; then
+            echo "versionrc_changed=true" >> $GITHUB_OUTPUT
+            echo ".versionrc file was modified"
+          else
+            echo "versionrc_changed=false" >> $GITHUB_OUTPUT
+            echo ".versionrc file was not modified"
+          fi
           
-      - name: Download WeChat JS-SDK
+      - name: Download WeChat JS-SDK versions
+        if: steps.check_versionrc.outputs.versionrc_changed == 'true'
         run: |
-          VERSION=${{ steps.get_version.outputs.version }}
-          URL="http://res.wx.qq.com/open/js/jweixin-${VERSION}.js"
-          echo "Downloading from: $URL"
-          curl -o index.js "$URL"
+          if [ ! -f .versionrc ]; then
+            echo ".versionrc file not found"
+            exit 1
+          fi
+          
+          mkdir -p lib
+          
+          while IFS= read -r version; do
+            if [ ! -z "$version" ]; then
+              echo "Processing version: $version"
+              mkdir -p "lib/$version"
+              URL="http://res.wx.qq.com/open/js/jweixin-${version}.js"
+              echo "Downloading from: $URL"
+              curl -o "lib/$version/index.js" "$URL"
+              if [ $? -eq 0 ]; then
+                echo "Successfully downloaded version $version"
+              else
+                echo "Failed to download version $version"
+              fi
+            fi
+          done < .versionrc
           
       - name: Commit and push changes
+        if: steps.check_versionrc.outputs.versionrc_changed == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add index.js
-          git commit -m "Update WeChat JS-SDK to version ${{ steps.get_version.outputs.version }}" || exit 0
-          git push origin HEAD:main
+          git add lib/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update WeChat JS-SDK versions from .versionrc"
+            git push origin main
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
