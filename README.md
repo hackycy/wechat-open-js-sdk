@@ -1,9 +1,10 @@
 # 微信官方 js-sdk
 
-基于CI将官方 js-sdk 发布到 npm
+基于`Github Action`将官方`js-sdk`发布到`npm`
 
 > 版本记录于[.versionrc](./versionrc)
-> 文档: https://developers.weixin.qq.com/doc/service/guide/h5/
+>
+> 微信官方文档: https://developers.weixin.qq.com/doc/service/guide/h5/
 
 ## 安装
 
