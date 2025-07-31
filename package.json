@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git+https://github.com/hackycy/wechat-js-sdk.git"
   },
-  "homepage": "https://github.com/hackycy/wechat-js-sdk",
+  "homepage": "https://github.com/hackycy/wechat-js-sdk#readme",
   "author": "hackycy",
   "scripts": {
     "download": "node scripts/download-sdk.js"
