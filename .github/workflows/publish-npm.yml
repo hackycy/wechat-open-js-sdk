@@ -22,11 +22,27 @@ jobs:
           node-version: lts/*
           registry-url: https://registry.npmjs.org/
 
+      - name: Extract version from tag
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Update package.json version
+        run: |
+          pnpm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version --allow-same-version
+
+      - name: Commit version update
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add package.json
+          git commit -m "chore: update version to ${{ steps.version.outputs.VERSION }}" || exit 0
+          git push
+
       # - run: pnpm dlx changelogithub
       #   env:
       #     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-      # - run: pnpm install
+      - run: pnpm install
       - run: pnpm publish --no-git-checks -r --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
