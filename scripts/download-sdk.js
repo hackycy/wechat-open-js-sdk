@@ -45,13 +45,19 @@ async function updatePackageJson(versions) {
   
   // Add exports for each version
   versions.forEach(version => {
-    exports[`./${version}`] = `./lib/${version}/index.js`;
+    exports[`./${version}`] = {
+      default: `./lib/${version}/index.js`,
+      types: './index.d.ts'
+    };
   });
   
   // Set the last version as default export
   if (versions.length > 0) {
     const lastVersion = versions[versions.length - 1];
-    exports["."] = `./lib/${lastVersion}/index.js`;
+    exports["."] = {
+      default: `./lib/${lastVersion}/index.js`,
+      types: './index.d.ts'
+    };
     mainExport = `./lib/${lastVersion}/index.js`;
   }
   
