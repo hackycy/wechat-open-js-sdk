@@ -6,10 +6,22 @@
   "main": "./lib/1.6.0/index.js",
   "types": "./index.d.ts",
   "exports": {
-    "./1.0.0": "./lib/1.0.0/index.js",
-    "./1.2.0": "./lib/1.2.0/index.js",
-    "./1.6.0": "./lib/1.6.0/index.js",
-    ".": "./lib/1.6.0/index.js"
+    "./1.0.0": {
+      "default": "./lib/1.0.0/index.js",
+      "types": "./index.d.ts"
+    },
+    "./1.2.0": {
+      "default": "./lib/1.2.0/index.js",
+      "types": "./index.d.ts"
+    },
+    "./1.6.0": {
+      "default": "./lib/1.6.0/index.js",
+      "types": "./index.d.ts"
+    },
+    ".": {
+      "default": "./lib/1.6.0/index.js",
+      "types": "./index.d.ts"
+    }
   },
   "keywords": [
     "wxjssdk",
