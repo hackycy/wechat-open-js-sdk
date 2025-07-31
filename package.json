@@ -1,6 +1,6 @@
 {
   "name": "wechat-open-js-sdk",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "微信JS-SDK",
   "packageManager": "pnpm@10.12.4",
   "main": "index.js",
@@ -12,10 +12,21 @@
     "jssdk",
     "wx"
   ],
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hackycy/wechat-js-sdk.git"
   },
   "homepage": "https://github.com/hackycy/wechat-js-sdk",
-  "author": "hackycy"
+  "author": "hackycy",
+  "scripts": {
+    "download": "node scripts/download-sdk.js"
+  },
+  "exports": {
+    "./1.2.0": "./lib/1.2.0/index.js",
+    "./1.6.0": "./lib/1.6.0/index.js",
+    ".": "./lib/1.6.0/index.js"
+  }
 }
