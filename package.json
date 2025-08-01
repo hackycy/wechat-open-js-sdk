@@ -14,6 +14,10 @@
       "default": "./lib/1.2.0/index.js",
       "types": "./index.d.ts"
     },
+    "./1.3.2": {
+      "default": "./lib/1.3.2/index.js",
+      "types": "./index.d.ts"
+    },
     "./1.6.0": {
       "default": "./lib/1.6.0/index.js",
       "types": "./index.d.ts"
