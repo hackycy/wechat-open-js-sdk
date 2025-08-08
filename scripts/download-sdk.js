@@ -135,14 +135,26 @@ async function downloadIfNeeded() {
     process.exit(1);
   }
 
+  // 清空 lib 目录
+  if (fs.existsSync(libDir)) {
+    try {
+      fs.rmSync(libDir, { recursive: true, force: true });
+      log('Cleared lib directory before downloading.');
+    } catch (e) {
+      // 兼容极少数环境不支持 rmSync
+      const entries = fs.readdirSync(libDir);
+      for (const entry of entries) {
+        fs.rmSync(path.join(libDir, entry), { recursive: true, force: true });
+      }
+      log('Emptied lib directory (fallback).');
+    }
+  }
+  fs.mkdirSync(libDir, { recursive: true });
+
   const versions = fs.readFileSync(versionrcPath, 'utf8')
     .split('\n')
     .map(line => line.trim())
     .filter(line => line.length > 0);
-
-  if (!fs.existsSync(libDir)) {
-    fs.mkdirSync(libDir, { recursive: true });
-  }
 
   for (const version of versions) {
     console.log(`Processing version: ${version}`);
