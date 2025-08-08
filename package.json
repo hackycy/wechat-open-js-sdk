@@ -7,24 +7,29 @@
   "types": "./index.d.ts",
   "exports": {
     "./1.0.0": {
-      "default": "./lib/1.0.0/index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "require": "./lib/1.0.0/index.js",
+      "default": "./lib/1.0.0/index.js"
     },
     "./1.2.0": {
-      "default": "./lib/1.2.0/index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "require": "./lib/1.2.0/index.js",
+      "default": "./lib/1.2.0/index.js"
     },
     "./1.3.2": {
-      "default": "./lib/1.3.2/index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "require": "./lib/1.3.2/index.js",
+      "default": "./lib/1.3.2/index.js"
     },
     "./1.6.0": {
-      "default": "./lib/1.6.0/index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "require": "./lib/1.6.0/index.js",
+      "default": "./lib/1.6.0/index.js"
     },
     ".": {
-      "default": "./lib/1.6.0/index.js",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "require": "./lib/1.6.0/index.js",
+      "default": "./lib/1.6.0/index.js"
     }
   },
   "keywords": [

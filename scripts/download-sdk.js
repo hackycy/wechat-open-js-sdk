@@ -5,31 +5,31 @@ const https = require('https');
 async function downloadFile(url, filePath) {
   return new Promise((resolve, reject) => {
     const file = fs.createWriteStream(filePath);
-    
+
     https.get(url, (response) => {
       if (response.statusCode !== 200) {
         file.close();
-        fs.unlink(filePath, () => {});
+        fs.unlink(filePath, () => { });
         reject(new Error(`Failed to download: ${response.statusCode}`));
         return;
       }
-      
+
       response.pipe(file);
-      
+
       file.on('finish', () => {
         file.close();
         resolve();
       });
-      
+
       file.on('error', (err) => {
         file.close();
-        fs.unlink(filePath, () => {});
+        fs.unlink(filePath, () => { });
         reject(err);
       });
-      
+
     }).on('error', (err) => {
       file.close();
-      fs.unlink(filePath, () => {});
+      fs.unlink(filePath, () => { });
       reject(err);
     });
   });
@@ -38,32 +38,34 @@ async function downloadFile(url, filePath) {
 async function updatePackageJson(versions) {
   const packageJsonPath = path.join(__dirname, '..', 'package.json');
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-  
+
   // Create exports object
   const exports = {};
   let mainExport = '';
-  
+
   // Add exports for each version
   versions.forEach(version => {
     exports[`./${version}`] = {
-      default: `./lib/${version}/index.js`,
-      types: './index.d.ts'
+      types: './index.d.ts',
+      require: `./lib/${version}/index.js`,
+      default: `./lib/${version}/index.js`
     };
   });
-  
+
   // Set the last version as default export
   if (versions.length > 0) {
     const lastVersion = versions[versions.length - 1];
     exports["."] = {
-      default: `./lib/${lastVersion}/index.js`,
-      types: './index.d.ts'
+      types: './index.d.ts',
+      require: `./lib/${lastVersion}/index.js`,
+      default: `./lib/${lastVersion}/index.js`
     };
     mainExport = `./lib/${lastVersion}/index.js`;
   }
-  
+
   packageJson.exports = exports;
   packageJson.main = mainExport; // Update main entry point
-  
+
   // Write back to package.json
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
   console.log('Updated package.json with exports');
@@ -89,7 +91,7 @@ async function downloadVersions() {
 
   for (const version of versions) {
     console.log(`Processing version: ${version}`);
-    
+
     const versionDir = path.join(libDir, version);
     if (!fs.existsSync(versionDir)) {
       fs.mkdirSync(versionDir, { recursive: true });
@@ -109,7 +111,7 @@ async function downloadVersions() {
 
   // Update package.json with exports
   await updatePackageJson(versions);
-  
+
   console.log('Download process completed');
 }
 
