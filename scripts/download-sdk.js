@@ -165,6 +165,23 @@ async function downloadIfNeeded() {
   }
 }
 
+function patchUMD(file) {
+  if (!fs.existsSync(file)) return;
+  let code = fs.readFileSync(file, 'utf8');
+  // 仅当还未替换过并存在原始模式时执行
+  if (code.includes(')(this,function') && !code.includes(')(window,function')) {
+    // 备份原始文件
+    const originFile = path.join(path.dirname(file), 'index.origin.js');
+    if (!fs.existsSync(originFile)) {
+        fs.writeFileSync(originFile, code);
+        log('Backup original UMD file ->', path.relative(ROOT, originFile));
+    }
+    code = code.replace(')(this,function', ')(window,function');
+    fs.writeFileSync(file, code);
+    log('Patched UMD this -> window for', path.relative(ROOT, file));
+  }
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const onlyMeta = args.includes('--update-meta');
@@ -178,8 +195,13 @@ async function main() {
     log('No versions found under lib/, nothing to update.');
     return;
   }
-  const latest = versions[0];
 
+  // 对所有版本打补丁，保证无论默认还是子路径都可安全运行
+  versions.forEach(v => {
+    patchUMD(path.join(LIB_DIR, v, 'index.js'));
+  });
+
+  const latest = versions[0];
   writeRootIndex(latest);
   updatePackageJson(versions, latest);
   log('Done.');

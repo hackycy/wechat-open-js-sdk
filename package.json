@@ -2,7 +2,7 @@
   "name": "wechat-open-js-sdk",
   "version": "0.0.4",
   "description": "微信官方 js-sdk npm版",
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.14.0",
   "main": "index.js",
   "types": "./index.d.ts",
   "type": "commonjs",
@@ -75,5 +75,6 @@
   "scripts": {
     "download": "node scripts/download-sdk.js",
     "update:meta": "node scripts/download-sdk.js --update-meta"
-  }
+  },
+  "sideEffects": true
 }
