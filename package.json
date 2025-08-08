@@ -3,33 +3,54 @@
   "version": "0.0.3",
   "description": "微信官方 js-sdk npm版",
   "packageManager": "pnpm@10.12.4",
-  "main": "./lib/1.6.0/index.js",
+  "main": "index.js",
   "types": "./index.d.ts",
+  "type": "commonjs",
   "exports": {
-    "./1.0.0": {
+    ".": {
       "types": "./index.d.ts",
-      "require": "./lib/1.0.0/index.js",
-      "default": "./lib/1.0.0/index.js"
+      "require": "./index.js",
+      "default": "./index.js"
     },
-    "./1.2.0": {
+    "./package.json": "./package.json",
+    "./1.6.0": {
       "types": "./index.d.ts",
-      "require": "./lib/1.2.0/index.js",
-      "default": "./lib/1.2.0/index.js"
+      "require": "./lib/1.6.0/index.js",
+      "default": "./lib/1.6.0/index.js"
     },
     "./1.3.2": {
       "types": "./index.d.ts",
       "require": "./lib/1.3.2/index.js",
       "default": "./lib/1.3.2/index.js"
     },
-    "./1.6.0": {
+    "./1.2.0": {
       "types": "./index.d.ts",
-      "require": "./lib/1.6.0/index.js",
-      "default": "./lib/1.6.0/index.js"
+      "require": "./lib/1.2.0/index.js",
+      "default": "./lib/1.2.0/index.js"
     },
-    ".": {
+    "./1.0.0": {
       "types": "./index.d.ts",
-      "require": "./lib/1.6.0/index.js",
-      "default": "./lib/1.6.0/index.js"
+      "require": "./lib/1.0.0/index.js",
+      "default": "./lib/1.0.0/index.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "index.d.ts"
+      ],
+      "1.6.0": [
+        "index.d.ts"
+      ],
+      "1.3.2": [
+        "index.d.ts"
+      ],
+      "1.2.0": [
+        "index.d.ts"
+      ],
+      "1.0.0": [
+        "index.d.ts"
+      ]
     }
   },
   "keywords": [
@@ -42,7 +63,8 @@
   ],
   "files": [
     "lib",
-    "index.d.ts"
+    "index.d.ts",
+    "index.js"
   ],
   "repository": {
     "type": "git",
@@ -51,6 +73,7 @@
   "homepage": "https://github.com/hackycy/wechat-open-js-sdk#readme",
   "author": "hackycy",
   "scripts": {
-    "download": "node scripts/download-sdk.js"
+    "download": "node scripts/download-sdk.js",
+    "update:meta": "node scripts/download-sdk.js --update-meta"
   }
 }

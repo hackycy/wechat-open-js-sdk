@@ -24,6 +24,8 @@ jobs:
       - run: pnpm install
         
       - run: pnpm run download
+
+      - run: pnpm run update:meta
         
       - name: Check for changes and commit
         run: |
