@@ -3,10 +3,8 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
-基于`Github Action`将官方`js-sdk`发布到`npm`
+基于`Github Action`将官方`js-sdk`发布到`npm`，版本记录于[.versionrc](./.versionrc)
 
-> 版本记录于[.versionrc](./versionrc)
->
 > 微信官方文档: https://developers.weixin.qq.com/doc/service/guide/h5/
 
 ## 安装
@@ -25,7 +23,6 @@ import wx from 'wechat-open-js-sdk'
 
 // 或者其他SDK版本，默认为.versionrc下最后一行指定的版本
 import wx from 'wechat-open-js-sdk/1.2.0'
-// ...
 ```
 
 # 感谢
