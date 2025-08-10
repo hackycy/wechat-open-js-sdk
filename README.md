@@ -3,7 +3,7 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
-基于`Github Action`将官方`js-sdk`发布到`npm`，版本记录于[.versionrc](./.versionrc)
+基于`Github Action`将`微信JS-SDK发布`到`npm`，版本记录于[.versionrc](./.versionrc)
 
 > 微信官方文档: https://developers.weixin.qq.com/doc/service/guide/h5/
 
