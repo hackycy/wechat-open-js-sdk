@@ -3,7 +3,7 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
-基于`Github Action`将`微信JS-SDK发布`到`npm`，版本记录于[.versionrc](./.versionrc)
+基于`Github Action`将`微信JS-SDK`发布到`npm`，版本记录于[.versionrc](./.versionrc)
 
 > 微信官方文档: https://developers.weixin.qq.com/doc/service/guide/h5/
 
@@ -25,7 +25,7 @@ import wx from 'wechat-open-js-sdk'
 import wx from 'wechat-open-js-sdk/1.2.0'
 ```
 
-# 感谢
+# 致谢
 
 - [wx-jssdk-ts](https://github.com/zhaoky/wx-jssdk-ts/tree/master)
 
