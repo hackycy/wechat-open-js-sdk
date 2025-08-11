@@ -1,4 +1,4 @@
-# 微信官方 js-sdk
+# 微信官方 JS-SDK
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
